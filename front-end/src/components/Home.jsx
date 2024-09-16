@@ -13,7 +13,8 @@ import {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2E7D32', // Green
+      // main: '#2E7D32', // Green
+      main: '#1565C0',
     },
     secondary: {
       main: '#1565C0', // Blue
@@ -41,7 +42,6 @@ const Home = () => {
       <CssBaseline />
       <AppBar position="static">
         <Toolbar >
-          
           <Button color="inherit">Home</Button>
           <Button color="inherit">Features</Button>
           <Button color="inherit">About</Button>
