@@ -84,7 +84,7 @@ const SmartInvestmentsPage = () => {
               boxShadow: '0 3px 5px 2px rgba(46, 125, 50, .3)',
             }}
           >
-            <Typography variant="h5" sx={{ mb: 1, color: 'rgba(255, 255, 255, 0.7)' }}>Your Holdings</Typography>
+            <Typography variant="h6" sx={{ mb: 1, mr:"370px", color: 'rgba(255, 255, 255, 0.7)' }}>Your Holdings</Typography>
             <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
               <Typography variant="h3" component="span" sx={{ color: 'white', fontWeight: 'bold' }}>₹196.6 L</Typography>
               <Typography variant="h5" component="span" sx={{ color: '#00E676', fontWeight: 'bold' }}>+12.7%</Typography>
