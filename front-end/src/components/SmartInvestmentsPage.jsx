@@ -38,7 +38,9 @@ const InvestmentCard = ({ title, icon, value, profit }) => (
       <LinearProgress 
         variant="determinate" 
         value={parseFloat(value) / 1.2} 
-        sx={{ width: '70%', height: 8, borderRadius: 4 }} 
+        sx={{ width: '75%', height: 8, borderRadius: 4,
+            
+         }} 
       />
       <Typography 
         variant="body2" 
@@ -53,8 +55,8 @@ const InvestmentCard = ({ title, icon, value, profit }) => (
 const SmartInvestmentsPage = () => {
   const investmentData = [
     { title: "Mutual funds", icon: <AccountBalance color="primary" />, value: "52.5L", profit: "+12.3L" },
-    { title: "Stocks", icon: <ShowChart color="primary" />, value: "15.9L", profit: "+5.2L" },
-    { title: "Gold", icon: <CurrencyRupee color="primary" />, value: "8.2L", profit: "+1.5L" },
+    { title: "Stocks", icon: <ShowChart color="primary" />, value: "15.9L", profit: "-5.2L" },
+    { title: "Gold", icon: <CurrencyRupee color="primary" />, value: "8.2L", profit: "-1.5L" },
     { title: "Land", icon: <Landscape color="primary" />, value: "120L", profit: "+1.06L" },
   ];
 
@@ -72,7 +74,7 @@ const SmartInvestmentsPage = () => {
               boxShadow: '0 3px 5px 2px rgba(46, 125, 50, .3)',
             }}
           >
-            <Typography variant="h5" sx={{ mb: 1, color: 'rgba(255, 255, 255, 0.7)' }}>Your Holdings</Typography>
+            <Typography variant="h6" sx={{ mb: 1 ,mr: '370px', color: 'rgba(255, 255, 255, 0.7)' }}>Your Holdings</Typography>
             <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
               <Typography variant="h3" component="span" sx={{ color: 'white', fontWeight: 'bold' }}>₹68.4 L</Typography>
               <Typography variant="h5" component="span" sx={{ color: '#4CAF50', fontWeight: 'bold' }}>+20.06L</Typography>
