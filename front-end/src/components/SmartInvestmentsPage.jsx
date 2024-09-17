@@ -4,7 +4,7 @@ import {
   Box, Container, Typography, Grid, Paper, CssBaseline,
 } from '@mui/material';
 import {
-  ShowChart, AccountBalance, Landscape, CurrencyRupee
+  ShowChart, AccountBalance, Landscape, CurrencyRupee, TrendingUp
 } from '@mui/icons-material';
 
 const darkTheme = createTheme({
@@ -13,30 +13,14 @@ const darkTheme = createTheme({
     primary: { main: '#4CAF50' },
     secondary: { main: '#2196F3' },
     background: { default: '#121212', paper: '#1E1E1E' },
+    profit: { main: '#00E676' },
+    marketAvg: { main: '#FFA726' },
   },
 });
 
-const ProgressIndicator = ({ value }) => {
-  const percentage = Math.min(value, 100);
-  return (
-    <Box sx={{ position: 'relative', width: '100%', height: 8, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 4, overflow: 'hidden' }}>
-      <Box
-        sx={{
-          position: 'absolute',
-          width: `${percentage}%`,
-          height: '100%',
-          bgcolor: 'primary.main',
-          borderRadius: 4,
-          transition: 'width 0.5s ease-in-out',
-        }}
-      />
-    </Box>
-  );
-};
-
-const InvestmentCard = ({ title, icon, value, profit }) => {
+const InvestmentCard = ({ title, icon, value, profit, avgMarketProfit }) => {
+  const profitColor = parseFloat(profit) >= parseFloat(avgMarketProfit) ? 'profit.main' : 'error.main';
   const profitPercentage = (parseFloat(profit) / parseFloat(value)) * 100;
-  
   return (
     <Paper 
       elevation={3} 
@@ -54,14 +38,23 @@ const InvestmentCard = ({ title, icon, value, profit }) => {
         </Box>
         <Typography variant="h6">₹{value}</Typography>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Box sx={{ width: '70%' }}>
-          <ProgressIndicator value={profitPercentage} />
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <TrendingUp sx={{ color: 'marketAvg.main', mr: 1, fontSize: 20 }} />
+          <Typography variant="body2" color="marketAvg.main">
+            Avg  : {avgMarketProfit}
+          </Typography>
         </Box>
         <Typography 
           variant="body2" 
-          color={profit.startsWith('+') ? 'primary.main' : 'error.main'}
+          sx={{ 
+            color: profitColor,
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+          }}
         >
+          <ShowChart sx={{ mr: 0.5, fontSize: 20 }} />
           {profit} ({profitPercentage.toFixed(1)}%)
         </Typography>
       </Box>
@@ -71,10 +64,10 @@ const InvestmentCard = ({ title, icon, value, profit }) => {
 
 const SmartInvestmentsPage = () => {
   const investmentData = [
-    { title: "Mutual funds", icon: <AccountBalance color="primary" />, value: "52.5L", profit: "+12.3L" },
-    { title: "Stocks", icon: <ShowChart color="primary" />, value: "15.9L", profit: "+5.2L" },
-    { title: "Gold", icon: <CurrencyRupee color="primary" />, value: "8.2L", profit: "+1.5L" },
-    { title: "Land", icon: <Landscape color="primary" />, value: "120L", profit: "+1.06L" },
+    { title: "Mutual funds", icon: <AccountBalance color="primary" />, value: "52.5L", profit: "+23.4%", avgMarketProfit: "+15.2%" },
+    { title: "Stocks", icon: <ShowChart color="primary" />, value: "15.9L", profit: "+32.7%", avgMarketProfit: "+18.5%" },
+    { title: "Gold", icon: <CurrencyRupee color="primary" />, value: "8.2L", profit: "+18.3%", avgMarketProfit: "+22.1%" },
+    { title: "Land", icon: <Landscape color="primary" />, value: "120L", profit: "+0.88%", avgMarketProfit: "+5.2%" },
   ];
 
   return (
@@ -93,8 +86,8 @@ const SmartInvestmentsPage = () => {
           >
             <Typography variant="h5" sx={{ mb: 1, color: 'rgba(255, 255, 255, 0.7)' }}>Your Holdings</Typography>
             <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-              <Typography variant="h3" component="span" sx={{ color: 'white', fontWeight: 'bold' }}>₹68.4 L</Typography>
-              <Typography variant="h5" component="span" sx={{ color: '#4CAF50', fontWeight: 'bold' }}>+20.06L</Typography>
+              <Typography variant="h3" component="span" sx={{ color: 'white', fontWeight: 'bold' }}>₹196.6 L</Typography>
+              <Typography variant="h5" component="span" sx={{ color: '#00E676', fontWeight: 'bold' }}>+12.7%</Typography>
             </Box>
           </Box>
           <Grid container spacing={2}>
