@@ -9,6 +9,7 @@ import {
   AccountBalance, TrendingUp, Receipt, Psychology, Notifications,
   Assessment, School, Person
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -51,21 +52,52 @@ const theme = createTheme({
   },
 });
 
-const Feature = ({ Icon, title, description }) => (
-  <Paper elevation={3} sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 3, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' } }}>
-    <Avatar sx={{ bgcolor: 'primary.main', alignSelf: 'center', width: 60, height: 60, mb: 2 }}>
+
+const Feature = ({ Icon, title, description, onClick }) => (
+  <Paper 
+    elevation={3}
+    onClick={onClick} // Add onClick handler here
+    sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 3, transition: 'transform 0.3s', cursor: 'pointer', '&:hover': { 
+        transform: 'translateY(-5px)' 
+      }
+    }}
+  >
+    <Avatar 
+      sx={{ 
+        bgcolor: 'primary.main', 
+        alignSelf: 'center', 
+        width: 60, 
+        height: 60, 
+        mb: 2 
+      }}
+    >
       <Icon sx={{ fontSize: 36 }} />
     </Avatar>
-    <Typography variant="h6" component="h3" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
+    <Typography 
+      variant="h6" 
+      component="h3" 
+      gutterBottom 
+      align="center" 
+      sx={{ fontWeight: 'bold' }}
+    >
       {title}
     </Typography>
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography 
+      variant="body2" 
+      color="text.secondary" 
+      align="center"
+    >
       {description}
     </Typography>
   </Paper>
 );
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const handlesmart = () => {
+    console.log('Feature clicked!');
+    navigate("/smartinvestment");
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -129,6 +161,7 @@ const HomePage = () => {
                 Icon={TrendingUp} 
                 title="Smart Investments" 
                 description="Up-to-date investment insights and suggestions using advanced RAG framework."
+                onClick={handlesmart}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
