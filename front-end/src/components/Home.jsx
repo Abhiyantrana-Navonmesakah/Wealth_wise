@@ -12,22 +12,51 @@ import {
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      // main: '#2E7D32', // Green
-      main: '#1565C0',
+      main: '#4CAF50', // A vibrant green
     },
     secondary: {
-      main: '#1565C0', // Blue
+      main: '#2196F3', // A bright blue
+    },
+    background: {
+      default: '#121212',
+      paper: '#1E1E1E',
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontWeight: 700,
+    },
+    h4: {
+      fontWeight: 600,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))',
+        },
+      },
     },
   },
 });
 
 const Feature = ({ Icon, title, description }) => (
-  <Paper elevation={3} sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
-    <Avatar sx={{ bgcolor: 'primary.main', alignSelf: 'center', width: 56, height: 56, mb: 2 }}>
-      <Icon sx={{ fontSize: 32 }} />
+  <Paper elevation={3} sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 3, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' } }}>
+    <Avatar sx={{ bgcolor: 'primary.main', alignSelf: 'center', width: 60, height: 60, mb: 2 }}>
+      <Icon sx={{ fontSize: 36 }} />
     </Avatar>
-    <Typography variant="h6" component="h3" gutterBottom align="center">
+    <Typography variant="h6" component="h3" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
       {title}
     </Typography>
     <Typography variant="body2" color="text.secondary" align="center">
@@ -36,12 +65,12 @@ const Feature = ({ Icon, title, description }) => (
   </Paper>
 );
 
-const Home = () => {
+const HomePage = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar >
+      <AppBar position="static" color="transparent" elevation={0}>
+        <Toolbar>
           <Button color="inherit">Home</Button>
           <Button color="inherit">Features</Button>
           <Button color="inherit">About</Button>
@@ -54,7 +83,7 @@ const Home = () => {
           bgcolor: 'background.paper',
           pt: 8,
           pb: 6,
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1600/900")',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("/api/placeholder/1600/900")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: 'white',
@@ -65,18 +94,18 @@ const Home = () => {
               variant="h2"
               align="center"
               gutterBottom
-              sx={{ fontWeight: 'bold' }}
+              sx={{ fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}
             >
               WealthWise
             </Typography>
-            <Typography variant="h5" align="center" paragraph>
+            <Typography variant="h5" align="center" paragraph sx={{ mb: 4, textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
               Your Personalized Financial Advisor & Planner
             </Typography>
             <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-              <Button variant="contained" size="large" sx={{ mr: 2 }}>
+              <Button variant="contained" size="large" sx={{ mr: 2, px: 4, py: 1 }}>
                 Get Started
               </Button>
-              <Button variant="outlined" size="large" sx={{ color: 'white', borderColor: 'white' }}>
+              <Button variant="outlined" size="large" sx={{ px: 4, py: 1 }}>
                 Learn More
               </Button>
             </Box>
@@ -84,35 +113,35 @@ const Home = () => {
         </Box>
 
         <Container sx={{ py: 8 }} maxWidth="lg">
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
             Key Features
           </Typography>
-          <Grid container spacing={4} sx={{ mt: 2 }}>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
               <Feature 
                 Icon={AccountBalance} 
-                title="Personalized Financial Planning" 
+                title="Personalized Planning" 
                 description="Tailored advice based on your individual financial goals and circumstances."
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Feature 
                 Icon={TrendingUp} 
-                title="Investment Recommendations" 
+                title="Smart Investments" 
                 description="Up-to-date investment insights and suggestions using advanced RAG framework."
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Feature 
                 Icon={Receipt} 
-                title="Expense Tracking and Analysis" 
+                title="Expense Analysis" 
                 description="Detailed analysis and categorization of your expenses using LLM technology."
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Feature 
                 Icon={Psychology} 
-                title="Interactive Financial Consultation" 
+                title="AI Consultation" 
                 description="Seamless user interaction managed through an agent-based architecture."
               />
             </Grid>
@@ -126,19 +155,19 @@ const Home = () => {
             <Grid item xs={12} sm={6} md={4}>
               <Feature 
                 Icon={School} 
-                title="Educational Resources" 
+                title="Financial Education" 
                 description="Access to financial literacy materials and guides to enhance your knowledge."
               />
             </Grid>
           </Grid>
         </Container>
 
-        <Box sx={{ bgcolor: 'grey.100', py: 8 }}>
+        <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
           <Container maxWidth="md">
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
               How WealthWise Works
             </Typography>
-            <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
+            <Paper elevation={3} sx={{ p: 4, borderRadius: 4 }}>
               <List>
                 <ListItem>
                   <ListItemIcon>
@@ -185,7 +214,7 @@ const Home = () => {
         </Box>
       </main>
 
-      <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
+      <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6, mt: 'auto' }}>
         <Container maxWidth="lg">
           <Typography variant="body1" align="center">
             © 2024 WealthWise. All rights reserved.
@@ -199,4 +228,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
