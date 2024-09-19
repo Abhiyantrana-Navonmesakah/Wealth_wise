@@ -55,7 +55,7 @@ const InvestmentCard = ({ title, icon, value, profit, avgMarketProfit }) => {
           }}
         >
           <ShowChart sx={{ mr: 0.5, fontSize: 20 }} />
-          {profit} ({profitPercentage.toFixed(1)}%)
+          {profit}({profitPercentage.toFixed(1)}%)
         </Typography>
       </Box>
     </Paper>
