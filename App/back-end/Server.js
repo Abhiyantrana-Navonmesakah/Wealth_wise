@@ -23,5 +23,5 @@ console.log("hello backend");
 //   .then(() => console.log('MongoDB Connected...'))
 //   .catch(err => console.error('MongoDB connection error:', err));
 
-
+// no routes
 app.listen(5000, () => console.log(`Server started on port 5000`));
